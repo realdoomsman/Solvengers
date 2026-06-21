@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #0a0c10;
+  --color-foreground: #e8ece8;
+  --color-card: #0d1117;
+  --color-card-hover: #161b22;
+  --color-border-muted: #1a2a1a;
+  --color-border-accent: #2a3a2a;
+
+  /* Military palette */
+  --color-camo-dark: #1a2e1a;
+  --color-camo-mid: #2d4a2d;
+  --color-camo-light: #4a6741;
+  --color-camo-sand: #8b7d5b;
+  --color-camo-olive: #556b2f;
+
+  /* Solana accents */
+  --color-sol-purple: #9945ff;
+  --color-sol-cyan: #14f195;
+  --color-sol-gradient-from: #9945ff;
+  --color-sol-gradient-to: #14f195;
+
+  /* Fonts */
+  --font-heading: "Black Ops One", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Animation */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-scan: scan 3s linear infinite;
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+  --animate-slide-up: slide-up 0.8s ease-out forwards;
+  --animate-shimmer: shimmer 2s linear infinite;
+}
+
+/* Keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* Film grain overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  animation: grain 0.5s steps(1) infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0c10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a3a2a;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4a6741;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(153, 69, 255, 0.3);
+  color: #14f195;
+}
+
+/* Custom utility classes */
+.text-gradient-sol {
+  background: linear-gradient(135deg, #9945ff, #14f195);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gradient-sol {
+  background: linear-gradient(135deg, #9945ff, #14f195);
+}
+
+.border-gradient-sol {
+  border-image: linear-gradient(135deg, #9945ff, #14f195) 1;
+}
+
+.glow-sol {
+  box-shadow: 0 0 20px rgba(153, 69, 255, 0.15), 0 0 40px rgba(20, 241, 149, 0.1);
+}
+
+.glow-green {
+  box-shadow: 0 0 15px rgba(20, 241, 149, 0.15), 0 0 30px rgba(20, 241, 149, 0.05);
+}
+
+/* Military stencil text effect */
+.stencil-text {
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.1em;
+}
+
+/* Camo pattern background */
+.bg-camo-pattern {
+  background-color: #0d1117;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(42, 78, 42, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(85, 107, 47, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 80%, rgba(26, 46, 26, 0.2) 0%, transparent 50%);
+}
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(13, 17, 23, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(42, 58, 42, 0.5);
+}
+
+/* Scan line effect for sections */
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+/* Grid pattern background */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(42, 58, 42, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42, 58, 42, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
