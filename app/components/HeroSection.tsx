@@ -163,7 +163,7 @@ export default function HeroSection() {
             <div className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
           <a
-            href="https://dexscreener.com"
+            href="https://dexscreener.com/solana/3nwntre2gv7huqtb5goi7nnofnoxdbetkqy1djujxedr"
             target="_blank"
             rel="noopener noreferrer"
             id="buy-cta"
